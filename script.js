@@ -24,10 +24,10 @@ const loadData = () => {
 // display loaded data 
 
 const displayData = (allDatas) => {
-    // console.log(allDatas);
-    allDatas.forEach(data => {
+    const allData = allDatas.slice(0, 20)
+    allData.forEach(data => {
         const div = document.createElement('div');
-        div.classList.add('col-lg-3', 'p-2');
+        div.classList.add('col-lg-4', 'p-2');
 
 
         div.innerHTML = `
@@ -63,7 +63,7 @@ const seeDetails = (id) => {
 
 const displyDetailsData = (data) => {
 
-    console.log(data);
+
     // display product image
     const PhotoDiv = document.createElement('div')
     PhotoDiv.classList.add('text-center')
