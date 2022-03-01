@@ -63,7 +63,7 @@ const seeDetails = (id) => {
 
 const displyDetailsData = (data) => {
 
-
+    console.log(data);
     // display product image
     const PhotoDiv = document.createElement('div')
     PhotoDiv.classList.add('text-center')
@@ -79,14 +79,15 @@ const displyDetailsData = (data) => {
     const mainFeature = data.mainFeatures
     const key = Object.keys(mainFeature)
     document.getElementById('phone-details-mainfeature').innerHTML =
-        `<h4>Main</h4>
-         <b>Relaese Date : </b>${data.releaseDate}
+        `<h5>${data.brand}</h5>
+        <h3>${data.name}</h3>
+        <p class="opacity-50"> <b>Relaese Date : </b>${data.releaseDate}</p>
         `
 
 
     key.forEach((key, index) => {
         const Detailsdiv = document.createElement('div')
-        Detailsdiv.innerHTML = `<b>${key}</b> : ${mainFeature[key]}`
+        Detailsdiv.innerHTML = `<p class="m-0"><b>${key}</b> : ${mainFeature[key]}</p>`
         document.getElementById('phone-details-mainfeature').appendChild(Detailsdiv)
 
     })
@@ -99,7 +100,7 @@ const displyDetailsData = (data) => {
 
     key_information.forEach((key, index) => {
         const div = document.createElement('div')
-        div.innerHTML = `<b>${key}</b> : ${othersInformation[key]}`
+        div.innerHTML = `<p class="m-0"><b>${key}</b> : ${othersInformation[key]}</p>`
         document.getElementById('phone-details-others').appendChild(div)
 
     })
