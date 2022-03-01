@@ -28,9 +28,7 @@ const displayData = (allDatas) => {
     allDatas.forEach(data => {
         const div = document.createElement('div');
         div.classList.add('col-lg-3', 'p-2');
-        const slug = data.slug
-        const id = slug.split('-').pop();
-        console.log(id);
+
 
         div.innerHTML = `
 
@@ -40,7 +38,7 @@ const displayData = (allDatas) => {
                 <h5 class="card-title">"${data.phone_name}"</h5>
                 <p class="card-text">Brand : ${data.brand} </p>
 
-                <a href="#" class="btn btn-primary" onclick="seeDetails(${id})">
+                <a href="#" class="btn btn-primary" onclick="seeDetails('${data.slug}')">
                  See Details
                 </a>
             </div>
@@ -55,18 +53,26 @@ const displayData = (allDatas) => {
 
 // see phone details 
 
-const seeDetails = (pra) => {
-    console.log(pra);
+const seeDetails = (id) => {
 
-
+    const url = `https://openapi.programming-hero.com/api/phone/${id}`
+    fetch(url)
+        .then(res => res.json())
+        .then(data => displyDetailsData(data.data))
 }
 
+const displyDetailsData = (data) => {
+    const main = data.others
+    console.log(main);
 
-// apple_iphone_xr-9320
-// apple_iphone_se_(2020)-10170
+    const key = Object.keys(main)
+    console.log(key);
+    key.forEach((key, index) => {
+        //console.log(`${key}:${main[key]}`)
+        const div = document.createElement('div')
+        div.innerHTML = `${key}:${main[key]}`
+        document.getElementById('phone-details').appendChild(div)
 
-// const str = 'apple_iphone_se_(2020)-10170';
-// const slug = str.substring(str.indexOf('-') + 1);
+    })
 
-// const slug = str.split('-').pop();
-// console.log(typeof parseInt(slug));
+}
