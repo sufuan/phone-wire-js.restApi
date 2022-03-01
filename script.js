@@ -33,8 +33,8 @@ const displayData = (allDatas) => {
         div.innerHTML = `
 
         <div class="card" style="width: 18rem;">
-            <img " src="${data.image}" class="card-img-top w-50" alt="...">
-            <div class="card-body">
+            <img " src="${data.image}" class="card-img-top w-50 m-auto" alt="...">
+            <div class="card-body m-auto">
                 <h5 class="card-title">"${data.phone_name}"</h5>
                 <p class="card-text">Brand : ${data.brand} </p>
 
@@ -62,33 +62,45 @@ const seeDetails = (id) => {
 }
 
 const displyDetailsData = (data) => {
+
+    console.log(data);
+    // display product image
+    const PhotoDiv = document.createElement('div')
+    PhotoDiv.classList.add('text-center')
+    PhotoDiv.innerHTML = `
+    <img  class="m-auto" src="${data.image}" alt="">
+  `
+    document.getElementById('product-photo').append(PhotoDiv)
+
+
+
+
     // display mainFeature
     const mainFeature = data.mainFeatures
-        //console.log(mainFeature);
-
     const key = Object.keys(mainFeature)
+    const Detailsdiv = document.createElement('div')
+    document.getElementById('phone-details-mainfeature').innerHTML =
+        `<h4>Main</h4>
+        Relaese Date : ${data.releaseDate}
+        `
+
 
     key.forEach((key, index) => {
-        //console.log(`${key}:${main[key]}`)
-        const div = document.createElement('div')
-        div.innerHTML = `${key}:${mainFeature[key]}`
-        document.getElementById('phone-details-mainfeature').appendChild(div)
+        const Detailsdiv = document.createElement('div')
+        Detailsdiv.innerHTML = `${key} : ${mainFeature[key]}`
+        document.getElementById('phone-details-mainfeature').appendChild(Detailsdiv)
 
     })
 
     // disply others information 
 
     const othersInformation = data.others
-    console.log(othersInformation);
+
     const key_information = Object.keys(othersInformation)
 
     key_information.forEach((key, index) => {
-        //console.log(`${key}:${main[key]}`)
         const div = document.createElement('div')
-        div.innerHTML = `
-        
-        ${key}:${othersInformation[key]}
-      `
+        div.innerHTML = `${key} : ${othersInformation[key]}`
         document.getElementById('phone-details-others').appendChild(div)
 
     })
