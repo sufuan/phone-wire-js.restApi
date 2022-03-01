@@ -26,6 +26,8 @@ const loadData = () => {
 const displayData = (allDatas) => {
     const allData = allDatas.slice(0, 20)
     allData.forEach(data => {
+
+
         const div = document.createElement('div');
         div.classList.add('col-lg-4', 'p-2');
 
@@ -35,7 +37,7 @@ const displayData = (allDatas) => {
         <div class="card" style="width: 18rem;">
             <img " src="${data.image}" class="card-img-top w-50 m-auto" alt="...">
             <div class="card-body m-auto">
-                <h5 class="card-title">"${data.phone_name}"</h5>
+                <h5 class="card-title">${data.phone_name}</h5>
                 <p class="card-text">Brand : ${data.brand} </p>
 
                 <a href="#" class="btn btn-primary" onclick="seeDetails('${data.slug}')">
@@ -63,7 +65,7 @@ const seeDetails = (id) => {
 
 const displyDetailsData = (data) => {
 
-    console.log(data);
+
     // display product image
     const PhotoDiv = document.createElement('div')
     PhotoDiv.classList.add('text-center')
