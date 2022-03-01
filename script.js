@@ -68,7 +68,7 @@ const displyDetailsData = (data) => {
     const PhotoDiv = document.createElement('div')
     PhotoDiv.classList.add('text-center')
     PhotoDiv.innerHTML = `
-    <img  class="m-auto" src="${data.image}" alt="">
+    <img  class="mb-4" src="${data.image}" alt="">
   `
     document.getElementById('product-photo').append(PhotoDiv)
 
@@ -78,16 +78,15 @@ const displyDetailsData = (data) => {
     // display mainFeature
     const mainFeature = data.mainFeatures
     const key = Object.keys(mainFeature)
-    const Detailsdiv = document.createElement('div')
     document.getElementById('phone-details-mainfeature').innerHTML =
         `<h4>Main</h4>
-        Relaese Date : ${data.releaseDate}
+         <b>Relaese Date : </b>${data.releaseDate}
         `
 
 
     key.forEach((key, index) => {
         const Detailsdiv = document.createElement('div')
-        Detailsdiv.innerHTML = `${key} : ${mainFeature[key]}`
+        Detailsdiv.innerHTML = `<b>${key}</b> : ${mainFeature[key]}`
         document.getElementById('phone-details-mainfeature').appendChild(Detailsdiv)
 
     })
@@ -100,7 +99,7 @@ const displyDetailsData = (data) => {
 
     key_information.forEach((key, index) => {
         const div = document.createElement('div')
-        div.innerHTML = `${key} : ${othersInformation[key]}`
+        div.innerHTML = `<b>${key}</b> : ${othersInformation[key]}`
         document.getElementById('phone-details-others').appendChild(div)
 
     })
