@@ -62,17 +62,37 @@ const seeDetails = (id) => {
 }
 
 const displyDetailsData = (data) => {
-    const main = data.others
-    console.log(main);
+    // display mainFeature
+    const mainFeature = data.mainFeatures
+        //console.log(mainFeature);
 
-    const key = Object.keys(main)
-    console.log(key);
+    const key = Object.keys(mainFeature)
+
     key.forEach((key, index) => {
         //console.log(`${key}:${main[key]}`)
         const div = document.createElement('div')
-        div.innerHTML = `${key}:${main[key]}`
-        document.getElementById('phone-details').appendChild(div)
+        div.innerHTML = `${key}:${mainFeature[key]}`
+        document.getElementById('phone-details-mainfeature').appendChild(div)
 
     })
+
+    // disply others information 
+
+    const othersInformation = data.others
+    console.log(othersInformation);
+    const key_information = Object.keys(othersInformation)
+
+    key_information.forEach((key, index) => {
+        //console.log(`${key}:${main[key]}`)
+        const div = document.createElement('div')
+        div.innerHTML = `
+        
+        ${key}:${othersInformation[key]}
+      `
+        document.getElementById('phone-details-others').appendChild(div)
+
+    })
+
+
 
 }
