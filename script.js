@@ -15,13 +15,20 @@ const loadData = () => {
 
             fetch(url)
                 .then(res => res.json())
-                .then(data => displayData(data.data))
+                .then(data => {
+                    if (data.data === null || data.data.length === 0) {
+                        console.log('objection')
+                    } else {
+
+                        displayData(data.data);
+                    }
+                })
 
 
         }
     } // loadData end
 
-// display loaded data 
+//display loaded data
 
 const displayData = (allDatas) => {
     document.getElementById('display-card').innerHTML = ''
@@ -30,30 +37,23 @@ const displayData = (allDatas) => {
     document.getElementById('phone-details-others').innerHTML = ''
     const allData = allDatas.slice(0, 20)
     allData.forEach(data => {
-
-
         const div = document.createElement('div');
         div.classList.add('col-lg-4', 'p-2');
 
-
         div.innerHTML = `
-
         <div class="card" style="width: 18rem;">
             <img " src="${data.image}" class="card-img-top w-50 m-auto" alt="...">
-            <div class="card-body m-auto">
-                <h5 class="card-title">${data.phone_name}</h5>
-                <p class="card-text">Brand : ${data.brand} </p>
-
-                <a href="#" class="btn btn-primary" onclick="seeDetails('${data.slug}')">
-                 See Details
-                </a>
-            </div>
+         <div class="card-body m-auto">
+            <h5 class="card-title">${data.phone_name}</h5>
+            <p class="card-text">Brand : ${data.brand} </p>
+            <a href="#" class="btn btn-primary" onclick="seeDetails('${data.slug}')">
+            See Details </a>
+         </div>
         </div>
         `
         document.getElementById('display-card').appendChild(div)
 
     })
-
 
 }
 
@@ -67,7 +67,9 @@ const seeDetails = (id) => {
         .then(data => displyDetailsData(data.data))
 }
 
+
 const displyDetailsData = (data) => {
+    const othersInformation = data.others
 
     document.getElementById('product-photo').innerHTML = ''
     document.getElementById('phone-details-mainfeature').innerHTML = ''
@@ -82,7 +84,6 @@ const displyDetailsData = (data) => {
 
 
 
-
     // display mainFeature
     const mainFeature = data.mainFeatures
     const key = Object.keys(mainFeature)
@@ -91,8 +92,6 @@ const displyDetailsData = (data) => {
         <h3>${data.name}</h3>
         <p class="opacity-50"> <b>Relaese Date : </b>${data.releaseDate}</p>
         `
-
-
     key.forEach((key, index) => {
         const Detailsdiv = document.createElement('div')
         Detailsdiv.innerHTML = `<p class="m-0"><b>${key}</b> : ${mainFeature[key]}</p>`
@@ -100,19 +99,17 @@ const displyDetailsData = (data) => {
 
     })
 
-    // disply others information 
-
-    const othersInformation = data.others
-
-    const key_information = Object.keys(othersInformation)
-
-    key_information.forEach((key, index) => {
-        const div = document.createElement('div')
-        div.innerHTML = `<p class="m-0"><b>${key}</b> : ${othersInformation[key]}</p>`
-        document.getElementById('phone-details-others').appendChild(div)
-
-    })
+    // // disply others information 
 
 
+    if (data.hasOwnProperty('others') === true) { //check property
+        const key_information = Object.keys(othersInformation)
+        key_information.forEach((key, index) => {
+            const div = document.createElement('div')
+            div.innerHTML = `<p class="m-0"><b>${key}</b> : ${othersInformation[key]}</p>`
+            document.getElementById('phone-details-others').appendChild(div)
+
+        })
+    }
 
 }
