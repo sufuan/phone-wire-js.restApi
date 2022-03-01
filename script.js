@@ -24,6 +24,10 @@ const loadData = () => {
 // display loaded data 
 
 const displayData = (allDatas) => {
+    document.getElementById('display-card').innerHTML = ''
+    document.getElementById('product-photo').innerHTML = ''
+    document.getElementById('phone-details-mainfeature').innerHTML = ''
+    document.getElementById('phone-details-others').innerHTML = ''
     const allData = allDatas.slice(0, 20)
     allData.forEach(data => {
 
@@ -65,8 +69,10 @@ const seeDetails = (id) => {
 
 const displyDetailsData = (data) => {
 
-
-    // display product image
+    document.getElementById('product-photo').innerHTML = ''
+    document.getElementById('phone-details-mainfeature').innerHTML = ''
+    document.getElementById('phone-details-others').innerHTML = ''
+        // display product image
     const PhotoDiv = document.createElement('div')
     PhotoDiv.classList.add('text-center')
     PhotoDiv.innerHTML = `
