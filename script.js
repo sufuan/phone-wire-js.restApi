@@ -1,13 +1,16 @@
+const searchInput = document.getElementById('search-input')
 const errMsg = document.getElementById('error-message');
 const spinner = document.getElementById('spinner')
 
 spinner.style.display = 'none'
 const loadData = () => {
+
+
         document.getElementById('display-card').innerHTML = ''
         document.getElementById('product-photo').innerHTML = ''
         document.getElementById('phone-details-mainfeature').innerHTML = ''
         document.getElementById('phone-details-others').innerHTML = ''
-        const searchInput = document.getElementById('search-input')
+
         spinner.style.display = 'block';
         if (!isNaN(searchInput.value)) {
             errMsg.innerText = 'Enter valid input'
@@ -47,10 +50,12 @@ const spinnerTimeoutMessage = () => {
 //display loaded data
 
 const displayData = (allDatas) => {
+    searchInput.value = ''
     document.getElementById('display-card').innerHTML = ''
     document.getElementById('product-photo').innerHTML = ''
     document.getElementById('phone-details-mainfeature').innerHTML = ''
     document.getElementById('phone-details-others').innerHTML = ''
+
     const allData = allDatas.slice(0, 20)
     allData.forEach(data => {
 
@@ -67,7 +72,7 @@ const displayData = (allDatas) => {
                 <h5 class="card-title">${data.phone_name}</h5>
                 <p class="card-text">Brand : ${data.brand} </p>
 
-                <a href="#" class="btn btn-primary" onclick="seeDetails('${data.slug}')">
+                <a href="#" class="btn btn-primary" onclick="displayDetails('${data.slug}')">
                  See Details
                 </a>
             </div>
@@ -81,9 +86,9 @@ const displayData = (allDatas) => {
 }
 
 
-// see phone details 
+// display phone details 
 
-const seeDetails = (id) => {
+const displayDetails = (id) => {
 
     const url = `https://openapi.programming-hero.com/api/phone/${id}`
     fetch(url)
@@ -91,39 +96,20 @@ const seeDetails = (id) => {
         .then(data => displyDetailsData(data.data))
 }
 
-
-
-
-
-
-
 const displyDetailsData = (data) => {
     const othersInformation = data.others
-
-
-
-
-
-
-    // others property check 
-
-
-
-
-
 
     document.getElementById('product-photo').innerHTML = ''
     document.getElementById('phone-details-mainfeature').innerHTML = ''
     document.getElementById('phone-details-others').innerHTML = ''
-        // display product image
+
+    // display product image
     const PhotoDiv = document.createElement('div')
     PhotoDiv.classList.add('text-center')
     PhotoDiv.innerHTML = `
     <img  class="mb-4" src="${data.image}" alt="">
   `
     document.getElementById('product-photo').append(PhotoDiv)
-
-
 
 
     // display mainFeature
@@ -134,8 +120,6 @@ const displyDetailsData = (data) => {
         <h3>${data.name}</h3>
         <p class="opacity-50"> <b>Relaese Date : </b>${data.releaseDate}</p>
         `
-
-
     key.forEach((key, index) => {
         const Detailsdiv = document.createElement('div')
         Detailsdiv.innerHTML = `<p class="m-0"><b>${key}</b> : ${mainFeature[key]}</p>`
@@ -144,7 +128,6 @@ const displyDetailsData = (data) => {
     })
 
     // // disply others information 
-
 
     if (data.hasOwnProperty('others') === true) {
         const key_information = Object.keys(othersInformation)
@@ -155,15 +138,7 @@ const displyDetailsData = (data) => {
             document.getElementById('phone-details-others').appendChild(div)
 
         })
-    } else {
-        console.log('othrs property nai');
     }
-
-
-
-
-
-
 
 
 }
